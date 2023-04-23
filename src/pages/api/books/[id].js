@@ -17,4 +17,19 @@ export default async function handler(req, res) {
             res.status(500).json({ message: error.message })
         }
     }
+    else if (req.method === 'PUT') {
+        try {
+            let book = await Book.findByIdAndUpdate(id, req.body);
+            if (!book) {
+                res.status(404).json({ message: `Book with ID ${id} not found` });
+            }
+            else {
+                book = await Book.findById(id);
+                res.status(200).json(book);
+            }
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).json({ message: error.message });
+        }
+    }
 }
