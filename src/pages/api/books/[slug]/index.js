@@ -1,8 +1,7 @@
-import Book from '../../../models/bookModel';
+import Book from '../../../../models/bookModel';
 
 export default async function handler(req, res) {
-    const id = req.query.id;
-
+    const id = req.query.slug;
     if (req.method === 'GET') {
         try {
             const book = await Book.findById(id);
