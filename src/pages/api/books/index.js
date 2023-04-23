@@ -1,4 +1,4 @@
-import Book from '../../models/bookModel';
+import Book from '../../../models/bookModel';
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
