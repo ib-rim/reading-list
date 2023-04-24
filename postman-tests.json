@@ -52,12 +52,9 @@
 					]
 				},
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/book",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/book",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -101,12 +98,9 @@
 					]
 				},
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/book",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/book",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -150,12 +144,9 @@
 					]
 				},
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/book",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/book",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -189,12 +180,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -239,12 +227,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/{{testId}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -309,12 +294,9 @@
 					]
 				},
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/{{testId}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -355,12 +337,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/{{testId}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -396,12 +375,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/{{testId}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -457,12 +433,9 @@
 					]
 				},
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/{{testId}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -498,12 +471,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books/{{testId}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
@@ -543,18 +513,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/author/{{testFilterAuthor}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books?author={{testFilterAuthor}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
-						"books",
-						"author",
-						"{{testFilterAuthor}}"
+						"books"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "{{testFilterAuthor}}"
+						}
 					]
 				}
 			},
@@ -589,18 +560,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/title/{{testFilterTitle}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books?title={{testFilterTitle}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
-						"books",
-						"title",
-						"{{testFilterTitle}}"
+						"books"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "{{testFilterTitle}}"
+						}
 					]
 				}
 			},
@@ -635,18 +607,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reading-list-eight.vercel.app/api/books/status/{{testFilterStatus}}",
-					"protocol": "https",
+					"raw": "{{baseURL}}/api/books?status={{testFilterStatus}}",
 					"host": [
-						"reading-list-eight",
-						"vercel",
-						"app"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
-						"books",
-						"status",
-						"{{testFilterStatus}}"
+						"books"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "{{testFilterStatus}}"
+						}
 					]
 				}
 			},
@@ -709,6 +682,11 @@
 		{
 			"key": "testFilterStatus",
 			"value": "reading"
+		},
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "string"
 		}
 	]
 }
