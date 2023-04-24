@@ -1,6 +1,8 @@
+import dbConnect from '@/pages/lib/dbConnect';
 import Book from '../../../../models/bookModel';
 
 export default async function handler(req, res) {
+    await dbConnect();
     const slug = req.query.slug.toLowerCase();
     const slugValue = req.query.slugValue.toLowerCase();
 
