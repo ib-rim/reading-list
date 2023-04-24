@@ -1,38 +1,92 @@
+# Reading List API
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+Return values are given in JSON.
 
-First, run the development server:
+## API Routes
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+**`POST`** https://reading-list-eight.vercel.app/api/book
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add a new book to the reading list
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<table>
+    <tr>
+       <th>Field</th>
+       <th>Type</th>
+       <th>Required?</th>
+       <th>Extra info</th>
+    </tr>
+    <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>Yes</td>
+        <td>n/a</td>
+    </tr>
+    <tr>
+        <td>author</td>
+        <td>String</td>
+        <td>Yes</td>
+        <td>n/a</td>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td>String</td>
+        <td>No</td>
+        <td>Valid values are "Unread", "Reading" or "Read". Defaults to "Unread".</td>
+    </tr>
+    <tr>
+        <td>started</td>
+        <td>Date</td>
+        <td>No</td>
+        <td>ISODate format</td>
+    </tr>
+    <tr>
+        <td>finished</td>
+        <td>Date</td>
+        <td>No</td>
+        <td>ISODate format</td>
+    </tr>
+</table>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**`GET`** https://reading-list-eight.vercel.app/api/books
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Get all books from the reading list
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+**`GET`** https://reading-list-eight.vercel.app/api/books/[id]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Get book with given `id` 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+**`GET`** https://reading-list-eight.vercel.app/api/books/title/[title]
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Get all books with given `title` 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+**`GET`** https://reading-list-eight.vercel.app/api/books/author/[author]
+
+Get all books with given `author` 
+
+---
+
+**`GET`** https://reading-list-eight.vercel.app/api/books/status/[status]
+
+Get all books with given `status` 
+
+---
+
+**`PUT`** https://reading-list-eight.vercel.app/api/books/[id]
+
+Update book with given `id` with new field values 
+
+---
+
+**`DELETE`** https://reading-list-eight.vercel.app/api/books/[id]
+
+Delete book with given `id` from the reading list 
