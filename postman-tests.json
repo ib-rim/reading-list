@@ -1,0 +1,714 @@
+{
+	"info": {
+		"_postman_id": "dd866257-1ce9-40d6-9841-7621fcedaf1a",
+		"name": "Reading List API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27051108"
+	},
+	"item": [
+		{
+			"name": "CREATE book with no status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"returns POSTed book with 'Unread' status\", () => {\r",
+							"    const title = pm.collectionVariables.get(\"testTitle\");\r",
+							"    const author = pm.collectionVariables.get(\"testAuthor\");\r",
+							"\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.title).to.eql(title);\r",
+							"    pm.expect(responseJson.author).to.eql(author);\r",
+							"    pm.expect(responseJson.status).to.eql('Unread');\r",
+							"\r",
+							"    pm.collectionVariables.set(\"testId\", responseJson._id);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "{{testTitle}}",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "{{testAuthor}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/book",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE book with no title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is bad request\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"message contains 'no title given'\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.message).to.contain('No title given');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "author",
+							"value": "{{testAuthor}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/book",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE book with no author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is bad request\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"message contains 'no author given'\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.message).to.contain('No author given');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "{{testTitle}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/book",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "READ all books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"returns books\", () => {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "READ a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"returns correct book\", () => {\r",
+							"    const title = pm.collectionVariables.get(\"testTitle\");\r",
+							"    const author = pm.collectionVariables.get(\"testAuthor\");\r",
+							"    const id = pm.collectionVariables.get(\"testId\");\r",
+							"\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson._id).to.eql(id);\r",
+							"    pm.expect(responseJson.title).to.eql(title);\r",
+							"    pm.expect(responseJson.author).to.eql(author);\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"returns book with updated fields\", () => {\r",
+							"    const title = pm.collectionVariables.get(\"testTitle\");\r",
+							"    const author = pm.collectionVariables.get(\"testAuthor\");\r",
+							"    const newStatus = pm.collectionVariables.get(\"testNewStatus\");\r",
+							"    const started = pm.collectionVariables.get(\"testStartedDate\");\r",
+							"    const finished = pm.collectionVariables.get(\"testFinishedDate\");\r",
+							"\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.title).to.eql(title);\r",
+							"    pm.expect(responseJson.author).to.eql(author);\r",
+							"    pm.expect(responseJson.status).to.eql(newStatus);\r",
+							"    pm.expect(responseJson.started).to.eql(started);\r",
+							"    pm.expect(responseJson.finished).to.eql(finished);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "status",
+							"value": "{{testNewStatus}}",
+							"type": "text"
+						},
+						{
+							"key": "started",
+							"value": "{{testStartedDate}}",
+							"type": "text"
+						},
+						{
+							"key": "finished",
+							"value": "{{testFinishedDate}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"returns correct book\", () => {\r",
+							"    const title = pm.collectionVariables.get(\"testTitle\");\r",
+							"    const author = pm.collectionVariables.get(\"testAuthor\");\r",
+							"    const id = pm.collectionVariables.get(\"testId\");\r",
+							"\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson._id).to.eql(id);\r",
+							"    pm.expect(responseJson.title).to.eql(title);\r",
+							"    pm.expect(responseJson.author).to.eql(author);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "READ a book that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is not found\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"message contains id not found\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const id = pm.collectionVariables.get(\"testId\");\r",
+							"    pm.expect(responseJson.message).to.contain(`${id} not found`);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE a book that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is not found\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"message contains id not found\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const id = pm.collectionVariables.get(\"testId\");\r",
+							"    pm.expect(responseJson.message).to.contain(`${id} not found`);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "status",
+							"value": "{{testNewStatus}}",
+							"type": "text"
+						},
+						{
+							"key": "started",
+							"value": "{{testStartedDate}}",
+							"type": "text"
+						},
+						{
+							"key": "finished",
+							"value": "{{testFinishedDate}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a book that doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is not found\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"message contains id not found\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const id = pm.collectionVariables.get(\"testId\");\r",
+							"    pm.expect(responseJson.message).to.contain(`${id} not found`);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/{{testId}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter book by author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"all books are from correct author\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const books = (Object.values(responseJson));\r",
+							"    const author = pm.collectionVariables.get(\"testFilterAuthor\");\r",
+							"\r",
+							"    books.forEach(book => {\r",
+							"        pm.expect(book.author).to.eql(author);\r",
+							"    })\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/author/{{testFilterAuthor}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"author",
+						"{{testFilterAuthor}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter book by title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"all books have correct title\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const books = (Object.values(responseJson));\r",
+							"    const title = pm.collectionVariables.get(\"testFilterTitle\");\r",
+							"\r",
+							"    books.forEach(book => {\r",
+							"        pm.expect(book.title).to.eql(title);\r",
+							"    })\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/title/{{testFilterTitle}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"title",
+						"{{testFilterTitle}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter book by status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"all books have correct status\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const books = (Object.values(responseJson));\r",
+							"    const status = pm.collectionVariables.get(\"testFilterStatus\");\r",
+							"\r",
+							"    books.forEach(book => {\r",
+							"        pm.expect(book.status).to.eql(status);\r",
+							"    })\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reading-list-eight.vercel.app/api/books/status/{{testFilterStatus}}",
+					"protocol": "https",
+					"host": [
+						"reading-list-eight",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"books",
+						"status",
+						"{{testFilterStatus}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "testAuthor",
+			"value": "Neil Gaiman"
+		},
+		{
+			"key": "testTitle",
+			"value": "Norse Mythology"
+		},
+		{
+			"key": "testStartedDate",
+			"value": "2023-04-20T00:00:00.000Z"
+		},
+		{
+			"key": "testFinishedDate",
+			"value": "2023-04-23T00:00:00.000Z"
+		},
+		{
+			"key": "testNewStatus",
+			"value": "Read"
+		},
+		{
+			"key": "testId",
+			"value": ""
+		},
+		{
+			"key": "testFilterAuthor",
+			"value": "Darren Shan"
+		},
+		{
+			"key": "testFilterTitle",
+			"value": "Quiet"
+		},
+		{
+			"key": "testFilterStatus",
+			"value": "reading"
+		}
+	]
+}
