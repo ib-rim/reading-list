@@ -55,7 +55,7 @@ Add a new book to the reading list
 
 Get all books from the reading list
 
-Results can be filtered using **optional** single or combined query parameters for `title`, `status` and `book`.
+Results can be filtered using **optional** single or combined query parameters for `title`, `author` and `status`.
 
 ### **`GET`** https://reading-list-eight.vercel.app/api/books/[id]
 
