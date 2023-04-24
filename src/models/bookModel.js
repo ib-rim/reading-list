@@ -12,6 +12,7 @@ const bookSchema = mongoose.Schema(
         },
         status: {
             type: String,
+            enum: ['Unread', 'Reading', 'Read'],
             default: "Unread"
         },
         started: {
