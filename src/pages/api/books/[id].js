@@ -1,9 +1,10 @@
 import dbConnect from '@/lib/dbConnect';
-import Book from '../../../../models/bookModel';
+import Book from '../../../models/bookModel';
 
 export default async function handler(req, res) {
     await dbConnect();
-    const id = req.query.slug;
+    const id = req.query.id;
+
     if (req.method === 'GET') {
         try {
             const book = await Book.findById(id);
