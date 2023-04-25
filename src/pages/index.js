@@ -38,7 +38,7 @@ export default function Home() {
                                 <td className="border border-gray-700 py-1 px-2 text-left">status</td>
                                 <td className="border border-gray-700 py-1 px-2 text-left">String</td>
                                 <td className="border border-gray-700 py-1 px-2 text-left">No</td>
-                                <td className="border border-gray-700 py-1 px-2 text-left">Valid values are "Unread", "Reading" or "Read". Defaults to "Unread".</td>
+                                <td className="border border-gray-700 py-1 px-2 text-left">Valid values are &quot;Unread&quot;, &quot;Reading&quot; or &quot;Read&quot;. Defaults to &quot;Unread&quot;.</td>
                             </tr>
                             <tr className="">
                                 <td className="border border-gray-700 py-1 px-2 text-left">started</td>
