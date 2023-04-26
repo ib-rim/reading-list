@@ -11,7 +11,9 @@ export default function Home() {
                         <span className="text-yellow-500 font-semibold mx-5">POST</span>
                         <span>new book to the reading list</span>
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">https://reading-list-eight.vercel.app/api/book</p>
+                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">
+                        <a href="https://reading-list-eight.vercel.app/api/book">https://reading-list-eight.vercel.app/api/book</a>
+                    </p>
                     <table className="mx-2 table-auto border-collapse border border-gray-700">
                         <thead>
                             <tr className="bg-gray-950">
@@ -61,7 +63,9 @@ export default function Home() {
                         <span className="text-green-500 font-semibold mx-5">GET</span>
                         <span>all books from the reading list</span>
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">https://reading-list-eight.vercel.app/api/books </p>
+                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">
+                        <a href="https://reading-list-eight.vercel.app/api/books">https://reading-list-eight.vercel.app/api/books</a>
+                    </p>
                 </div>
 
                 <div className="py-3">
@@ -69,7 +73,9 @@ export default function Home() {
                         <span className="text-green-500 font-semibold mx-5">GET</span>
                         <span>all books from the reading list filtered using optional single or combined query parameters for title, author and status</span>
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">https://reading-list-eight.vercel.app/api/books?title=[title]&author=[author]&status=[status]</p>
+                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">
+                        <a href="https://reading-list-eight.vercel.app/api/books?title=[title]&author=[author]&status=[status]">https://reading-list-eight.vercel.app/api/books?title=[title]&author=[author]&status=[status]</a>
+                    </p>
                 </div>
 
                 <div className="py-3">
@@ -77,7 +83,9 @@ export default function Home() {
                         <span className="text-green-500 font-semibold mx-5">GET</span>
                         <span>book with given id</span>
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">https://reading-list-eight.vercel.app/api/books/[id] </p>
+                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">
+                        <a href="https://reading-list-eight.vercel.app/api/books/[id]">https://reading-list-eight.vercel.app/api/books/[id]</a>
+                    </p>
                 </div>
 
                 <div className="py-3">
@@ -85,7 +93,9 @@ export default function Home() {
                         <span className="text-blue-500 font-semibold mx-5">PUT</span>
                         <span>book with given id with new field values</span>
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">https://reading-list-eight.vercel.app/api/books/[id] </p>
+                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">
+                        <a href="https://reading-list-eight.vercel.app/api/books/[id]">https://reading-list-eight.vercel.app/api/books/[id]</a>
+                    </p>
                 </div>
 
                 <div className="py-3">
@@ -93,7 +103,9 @@ export default function Home() {
                         <span className="text-red-500 font-semibold mx-5 2">DELETE</span>
                         <span>book with given id from the reading list</span>
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">https://reading-list-eight.vercel.app/api/books/[id] </p>
+                    <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">
+                        <a href="https://reading-list-eight.vercel.app/api/books/[id]">https://reading-list-eight.vercel.app/api/books/[id]</a>
+                    </p>
                 </div>
             </div>
         </main>
