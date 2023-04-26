@@ -8,7 +8,7 @@ Return values are given in JSON.
 
 ### **`POST`** new book to the reading list
 
-https://reading-list-eight.vercel.app/api/book
+> https://reading-list-eight.vercel.app/api/book
 
 <table>
     <tr>
@@ -49,24 +49,32 @@ https://reading-list-eight.vercel.app/api/book
     </tr>
 </table>
 
----
+#
 
 ### **`GET`** all books from the reading list 
 
-https://reading-list-eight.vercel.app/api/books
+> https://reading-list-eight.vercel.app/api/books
 
-### **`GET`** all books from the reading list filtered using **optional** single or combined query parameters for `title`, `author` and `status`
+#
 
-https://reading-list-eight.vercel.app/api/books?title=[title]&author=[author]&status=[status]
+### **`GET`** all books from the reading list filtered using **optional** single or combined query parameters for title, author and status
 
-### **`GET`** book with given `id` 
+> https://reading-list-eight.vercel.app/api/books?title=[title]&author=[author]&status=[status]
 
-https://reading-list-eight.vercel.app/api/books/[id]
+#
 
-### **`PUT`** book with given `id` with new field values 
+### **`GET`** book with given id
 
-https://reading-list-eight.vercel.app/api/books/[id]
+> https://reading-list-eight.vercel.app/api/books/[id]
 
-### **`DELETE`** book with given `id` from the reading list 
+#
 
-https://reading-list-eight.vercel.app/api/books/[id] 
+### **`PUT`** book with given id with new field values 
+
+> https://reading-list-eight.vercel.app/api/books/[id]
+
+#
+
+### **`DELETE`** book with given id from the reading list 
+
+> https://reading-list-eight.vercel.app/api/books/[id] 
