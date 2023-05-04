@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-    --foreground-hsl: 0%, 0%, 0%;
+    --text-hsl: 0%, 0%, 0%;
     --background-start-hsl: 0%, 0%, 0%;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --foreground-hsl: 0, 0%, 100%;
-        --background-hsl: 200, 40%, 10%;
+        --text-hsl: 0, 0%, 100%;
+        --background-hsl: 221, 39%, 11%;
     }
 }
 
 body {
-    color: hsl(var(--foreground-hsl));
+    color: hsl(var(--text-hsl));
     background-color: hsl(var(--background-hsl));
 }
