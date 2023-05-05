@@ -16,6 +16,15 @@ export default function Home() {
             })
     }
 
+    const deleteBook = async (id, title, author) => {
+        if (confirm(`Delete ${title} by ${author}?`)) {
+            fetch(`/api/books/${id}`, {
+                method: "DELETE",
+            })
+                .then(getBooks())
+        }
+    }
+
     const formatDateTime = (dateTime) => {
         if (dateTime) {
             return dateTime.toString().split("T")[0];
@@ -23,7 +32,7 @@ export default function Home() {
     }
 
     return (
-        <main> 
+        <main>
             <table className="text-black lg:mx-20 my-5 text-left border-cyan-700 border-l-8">
                 <caption className="text-5xl text-white text-left font-thin my-10">Reading List</caption>
                 <thead className="text-left">
@@ -46,7 +55,7 @@ export default function Home() {
                                     <td className={`px-2 py-1 font-semibold ${book.status === "Read" ? "text-green-600" : book.status === "Reading" ? "text-yellow-500" : "text-red-600"}`}>{book.status}</td>
                                     <td className="px-2 py-1">{formatDateTime(book.started)}</td>
                                     <td className="px-2 py-1">{formatDateTime(book.finished)}</td>
-                                    <td className="text-red-700 font-bold px-2 bg-gray-900"><button>X</button></td>
+                                    <td className="text-red-700 font-bold px-2 bg-gray-900"><button onClick={() => deleteBook(book._id, book.title, book.author)}>X</button></td>
                                 </tr>
                             )
                         })
