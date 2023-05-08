@@ -69,18 +69,20 @@ export default function Home() {
             book["finished"] = finished;
         }
 
-        const response = await fetch(`/api/books/${id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(book),
-        })
-        const promise = response.json();
-        promise.then(() => {
-            getBooks();
-            setEditableBook('');
-        })
+        if (confirm(`Update ${title} by ${author}?`)) {
+            const response = await fetch(`/api/books/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(book),
+            })
+            const promise = response.json();
+            promise.then(() => {
+                getBooks();
+                setEditableBook('');
+            })
+        }
     }
 
     const handleEdit = (id, title, author, status, started, finished) => {
