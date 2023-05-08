@@ -4,6 +4,8 @@ export default function Home() {
 
     const [books, setBooks] = useState([]);
 
+    const [editableBook, setEditableBook] = useState('');
+
     const [inputTitle, setInputTitle] = useState('');
     const [inputAuthor, setInputAuthor] = useState('');
     const [inputStatus, setInputStatus] = useState('');
@@ -51,6 +53,50 @@ export default function Home() {
         }
     }
 
+    const updateBook = async (id, title, author, status, started, finished) => {
+        const book = {
+            "title": title,
+            "author": author,
+        };
+
+        if (status) {
+            book["status"] = status;
+        }
+        if (started) {
+            book["started"] = started;
+        }
+        if (finished) {
+            book["finished"] = finished;
+        }
+
+        const response = await fetch(`/api/books/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(book),
+        })
+        const promise = response.json();
+        promise.then(() => {
+            getBooks();
+            setEditableBook('');
+        })
+    }
+
+    const handleEdit = (id, title, author, status, started, finished) => {
+        setEditableBook(id);
+        if (!id) {
+            resetInput();
+        }
+        else {
+            setInputTitle(title);
+            setInputAuthor(author);
+            setInputStatus(status);
+            setInputStarted(started);
+            setInputFinished(finished);
+        }
+    }
+
     const deleteBook = async (id, title, author) => {
         if (confirm(`Delete ${title} by ${author}?`)) {
             const response = await fetch(`/api/books/${id}`, {
@@ -65,6 +111,14 @@ export default function Home() {
         if (dateTime) {
             return dateTime.toString().split("T")[0];
         }
+    }
+
+    const resetInput = () => {
+        setInputTitle('');
+        setInputAuthor('');
+        setInputStatus('');
+        setInputStarted('');
+        setInputFinished('');
     }
 
     return (
@@ -86,24 +140,82 @@ export default function Home() {
                         books.map(book => {
                             return (
                                 <tr key={book._id}>
-                                    <td className="px-2 py-1">{book.title}</td>
-                                    <td className="px-2 py-1">{book.author}</td>
-                                    <td className={`px-2 py-1 font-semibold ${book.status === "Read" ? "text-green-600" : book.status === "Reading" ? "text-yellow-500" : "text-red-600"}`}>{book.status}</td>
-                                    <td className="px-2 py-1">{formatDateTime(book.started)}</td>
-                                    <td className="px-2 py-1">{formatDateTime(book.finished)}</td>
-                                    <td className="text-red-700 font-bold px-2 bg-gray-900"><button onClick={() => deleteBook(book._id, book.title, book.author)}>X</button></td>
+                                    <td className="px-2 py-1">
+                                        {editableBook === book._id ?
+                                            <input onInput={e => setInputTitle(e.target.value)} type="text" defaultValue={book.title} className="border border-gray-700 px-1 w-full"></input>
+                                            :
+                                            book.title
+                                        }
+                                    </td>
+                                    <td className="px-2 py-1">
+                                        {editableBook === book._id ?
+                                            <input onInput={e => setInputAuthor(e.target.value)} type="text" defaultValue={book.author} className="border border-gray-700 px-1 w-full"></input>
+                                            :
+                                            book.author
+                                        }
+                                    </td>
+                                    <td className={`px-2 py-1 font-semibold ${book.status === "Read" ? "text-green-600" : book.status === "Reading" ? "text-yellow-500" : "text-red-600"}`}>
+                                        {editableBook === book._id ?
+                                            <input onInput={e => setInputStatus(e.target.value)} type="text" defaultValue={book.status} className="border border-gray-700 px-1 w-full"></input>
+                                            :
+                                            book.status
+                                        }
+                                    </td>
+                                    <td className="px-2 py-1">
+                                        {editableBook === book._id ?
+                                            <input onInput={e => setInputStarted(e.target.value)} type="text" defaultValue={formatDateTime(book.started)} className="border border-gray-700 px-1 w-full"></input>
+                                            :
+                                            formatDateTime(book.started)
+                                        }
+                                    </td>
+                                    <td className="px-2 py-1">
+                                        {editableBook === book._id ?
+                                            <input onInput={e => setInputFinished(e.target.value)} type="text" defaultValue={formatDateTime(book.finished)} className="border border-gray-700 px-1 w-full"></input>
+                                            :
+                                            formatDateTime(book.finished)
+                                        }
+                                    </td>
+                                    <td className="font-bold px-2 bg-gray-900">
+                                        {editableBook === book._id ?
+                                            <>
+                                                <button className="text-green-700 pr-2" onClick={() => updateBook(book._id, inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)}>✓</button>
+                                                <button className="text-red-700" onClick={() => handleEdit('', '', '', '', '', '')}>X</button>
+                                            </>
+                                            :
+                                            <>
+                                                <button className="text-blue-700 pr-2" onClick={() => handleEdit(book._id, book.title, book.author, book.status, book.started, book.finished)}>EDIT</button>
+                                                <button className="text-red-700" onClick={() => deleteBook(book._id, book.title, book.author)}>DELETE</button>
+                                            </>
+                                        }
+                                    </td>
                                 </tr>
                             )
                         })
                     }
-                    <tr>
-                        <td className="px-2 py-1"><input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input onInput={e => setInputStarted(e.target.value)} type="text" placeholder="Started Date" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="bg-gray-900"><button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-green-500 font-bold px-2">Add book</button></td>
-                    </tr>
+                    {!editableBook ?
+                        <tr>
+                            <td className="px-2 py-1">
+                                <input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title" className="border border-gray-700 px-1 w-full"></input>
+                            </td>
+                            <td className="px-2 py-1">
+                                <input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author" className="border border-gray-700 px-1 w-full"></input>
+                            </td>
+                            <td className="px-2 py-1">
+                                <input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className="border border-gray-700 px-1 w-full"></input>
+                            </td>
+                            <td className="px-2 py-1">
+                                <input onInput={e => setInputStarted(e.target.value)} type="text" placeholder="Started Date" className="border border-gray-700 px-1 w-full"></input>
+                            </td>
+                            <td className="px-2 py-1">
+                                <input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className="border border-gray-700 px-1 w-full"></input>
+                            </td>
+                            <td className="bg-gray-900">
+                                <button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-green-500 font-bold px-2">ADD</button>
+                            </td>
+                        </tr>
+                        :
+                        <></>
+                    }
                 </tbody>
             </table>
         </main>
