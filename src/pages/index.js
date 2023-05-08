@@ -4,6 +4,12 @@ export default function Home() {
 
     const [books, setBooks] = useState([]);
 
+    const [inputTitle, setInputTitle] = useState('');
+    const [inputAuthor, setInputAuthor] = useState('');
+    const [inputStatus, setInputStatus] = useState('');
+    const [inputStarted, setInputStarted] = useState('');
+    const [inputFinished, setInputFinished] = useState('');
+
     useEffect(() => {
         getBooks();
     }, [])
@@ -14,6 +20,34 @@ export default function Home() {
             .then((data) => {
                 setBooks(data);
             })
+    }
+    
+    const addBook = async (title, author, status, started, finished) => {
+        const book = {
+            "title": title,
+            "author": author,
+        };
+
+        if(status) {
+            book["status"] = status;
+        }
+        if(started) {
+            book["started"] = started;
+        }
+        if(finished) {
+            book["finished"] = finished;
+        }
+
+        if (confirm(`Add ${title} by ${author}?`)) {
+            fetch(`/api/book/`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(book),
+            })
+                .then(getBooks())
+        }
     }
 
     const deleteBook = async (id, title, author) => {
@@ -61,12 +95,12 @@ export default function Home() {
                         })
                     }
                     <tr>
-                        <td className="px-2 py-1"><input type="text" placeholder="Book Title" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input type="text" placeholder="Book Author" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input type="text" placeholder="Book Status" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input type="text" placeholder="Started Date" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="px-2 py-1"><input type="text" placeholder="Finished Date" className="border border-gray-700 px-1 w-full"></input></td>
-                        <td className="bg-gray-900"><button className="text-green-500 font-bold px-2">Add book</button></td>
+                        <td className="px-2 py-1"><input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title" className="border border-gray-700 px-1 w-full"></input></td>
+                        <td className="px-2 py-1"><input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author" className="border border-gray-700 px-1 w-full"></input></td>
+                        <td className="px-2 py-1"><input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className="border border-gray-700 px-1 w-full"></input></td>
+                        <td className="px-2 py-1"><input onInput={e => setInputStarted(e.target.value)} type="text" placeholder="Started Date" className="border border-gray-700 px-1 w-full"></input></td>
+                        <td className="px-2 py-1"><input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className="border border-gray-700 px-1 w-full"></input></td>
+                        <td className="bg-gray-900"><button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-green-500 font-bold px-2">Add book</button></td>
                     </tr>
                 </tbody>
             </table>
