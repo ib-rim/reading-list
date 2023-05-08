@@ -15,47 +15,49 @@ export default function Home() {
     }, [])
 
     const getBooks = async () => {
-        fetch('/api/books')
-            .then((res) => res.json())
-            .then((data) => {
-                setBooks(data);
-            })
+        const response = await fetch('/api/books');
+        const promise = response.json();
+        promise.then((data) => {
+            setBooks(data);
+        })
     }
-    
+
     const addBook = async (title, author, status, started, finished) => {
         const book = {
             "title": title,
             "author": author,
         };
 
-        if(status) {
+        if (status) {
             book["status"] = status;
         }
-        if(started) {
+        if (started) {
             book["started"] = started;
         }
-        if(finished) {
+        if (finished) {
             book["finished"] = finished;
         }
 
         if (confirm(`Add ${title} by ${author}?`)) {
-            fetch(`/api/book/`, {
+            const response = await fetch(`/api/book`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(book),
             })
-                .then(getBooks())
+            const promise = response.json();
+            promise.then(getBooks())
         }
     }
 
     const deleteBook = async (id, title, author) => {
         if (confirm(`Delete ${title} by ${author}?`)) {
-            fetch(`/api/books/${id}`, {
+            const response = await fetch(`/api/books/${id}`, {
                 method: "DELETE",
-            })
-                .then(getBooks())
+            });
+            const promise = response.json();
+            promise.then(getBooks());
         }
     }
 
