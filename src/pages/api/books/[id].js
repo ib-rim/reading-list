@@ -19,7 +19,7 @@ export default async function handler(req, res) {
             res.status(500).json({ message: error.message })
         }
     }
-    else if (req.method === 'PUT') {
+    else if (req.method === 'PUT' || req.method === 'PATCH') {
         try {
             let book = await Book.findByIdAndUpdate(id, req.body);
             if (!book) {

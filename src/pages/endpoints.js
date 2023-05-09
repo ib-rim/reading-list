@@ -90,7 +90,7 @@ export default function Endpoints() {
 
                 <div className="py-3">
                     <h3 className="text-xl pb-3">
-                        <span className="text-blue-500 font-semibold mx-5">PUT</span>
+                        <span className="text-blue-500 font-semibold mx-5">PUT / PATCH</span>
                         <span>book with given id with new field values</span>
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 p-2 mx-2 mb-3">

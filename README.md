@@ -69,7 +69,7 @@ Return values are given in JSON.
 
 #
 
-### **`PUT`** book with given id with new field values 
+### **`PUT / PATCH`** book with given id with new field values 
 
 > https://reading-list-eight.vercel.app/api/books/[id]
 

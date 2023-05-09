@@ -72,10 +72,14 @@ export default function Home() {
 
     const updateBook = async (id, title, author, status, started, finished) => {
         const book = {
-            "title": title,
-            "author": author,
         };
 
+        if (title) {
+            book["title"] = title;
+        }
+        if (author) {
+            book["author"] = author;
+        }
         if (status) {
             book["status"] = status;
         }
