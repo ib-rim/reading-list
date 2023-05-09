@@ -13,6 +13,9 @@ export default function Home() {
     const [inputFinished, setInputFinished] = useState('');
 
     const [errorMessages, setErrorMessages] = useState([]);
+    const titleError = "New book must have a title";
+    const authorError = "New book must have an author";
+    const statusError = "New book status must be unread, reading or read";
 
     useEffect(() => {
         getBooks();
@@ -59,13 +62,13 @@ export default function Home() {
                 promise.then(data => {
                     let messages = [];
                     if (data.message.includes("No title given")) {
-                        messages.push("New book must have a title");
+                        messages.push(titleError);
                     }
                     if (data.message.includes("No author given")) {
-                        messages.push("New book must have an author");
+                        messages.push(authorError);
                     }
                     if (data.message.includes("status")) {
-                        messages.push("New book status must be unread, reading or read");
+                        messages.push(statusError);
                     }
                     setErrorMessages(messages);
                 });
@@ -228,13 +231,13 @@ export default function Home() {
                     {!editableBook ?
                         <tr>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title*" className={`px-1 w-full border ${errorMessages.includes("New book must have a title") ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
+                                <input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title*" className={`px-1 w-full border ${errorMessages.includes(titleError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author*" className={`px-1 w-full border ${errorMessages.includes("New book must have an author") ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
+                                <input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author*" className={`px-1 w-full border ${errorMessages.includes(authorError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className={`px-1 w-full border ${errorMessages.includes("New book status must be unread, reading or read") ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
+                                <input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className={`px-1 w-full border ${errorMessages.includes(statusError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
                                 <input onInput={e => setInputStarted(e.target.value)} type="text" placeholder="Started Date" className="border border-gray-700 px-1 w-full"></input>
