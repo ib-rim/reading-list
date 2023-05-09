@@ -16,6 +16,8 @@ export default function Home() {
     const titleError = "New book must have a title";
     const authorError = "New book must have an author";
     const statusError = "New book status must be unread, reading or read";
+    const startedError = "New book started date must be in format yyyy-mm-dd";
+    const finishedError = "New book finished date must be in format yyyy-mm-dd";
 
     useEffect(() => {
         getBooks();
@@ -69,6 +71,12 @@ export default function Home() {
                     }
                     if (data.message.includes("status")) {
                         messages.push(statusError);
+                    }
+                    if (data.message.includes("started")) {
+                        messages.push(startedError);
+                    }
+                    if (data.message.includes("finished")) {
+                        messages.push(finishedError);
                     }
                     setErrorMessages(messages);
                 });
@@ -240,10 +248,10 @@ export default function Home() {
                                 <input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className={`px-1 w-full border ${errorMessages.includes(statusError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputStarted(e.target.value)} type="text" placeholder="Started Date" className="border border-gray-700 px-1 w-full"></input>
+                                <input onInput={e => setInputStarted(e.target.value)} type="text" placeholder="Started Date" className={`px-1 w-full border ${errorMessages.includes(startedError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className="border border-gray-700 px-1 w-full"></input>
+                                <input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className={`px-1 w-full border ${errorMessages.includes(finishedError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="bg-gray-900">
                                 <button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-yellow-500 font-bold px-2">ADD</button>
