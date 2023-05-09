@@ -33,7 +33,7 @@ export default function Home() {
         };
 
         if (status) {
-            book["status"] = status;
+            book["status"] = formatStatus(status);
         }
         if (started) {
             book["started"] = started;
@@ -84,7 +84,7 @@ export default function Home() {
             book["author"] = author;
         }
         if (status) {
-            book["status"] = status;
+            book["status"] = formatStatus(status);
         }
         if (started) {
             book["started"] = started;
@@ -131,6 +131,12 @@ export default function Home() {
             });
             const promise = response.json();
             promise.then(getBooks());
+        }
+    }
+    
+    const formatStatus = (status) => {
+        if (status) {
+            return status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
         }
     }
 
