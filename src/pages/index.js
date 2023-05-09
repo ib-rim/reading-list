@@ -230,7 +230,7 @@ export default function Home() {
                                 <input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className="border border-gray-700 px-1 w-full"></input>
                             </td>
                             <td className="bg-gray-900">
-                                <button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-green-500 font-bold px-2">ADD</button>
+                                <button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-yellow-500 font-bold px-2">ADD</button>
                             </td>
                         </tr>
                         :
