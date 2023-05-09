@@ -63,10 +63,10 @@ export default function Home() {
             else {
                 promise.then(data => {
                     let messages = [];
-                    if (data.message.includes("No title given")) {
+                    if (data.message.includes("title")) {
                         messages.push(titleError);
                     }
-                    if (data.message.includes("No author given")) {
+                    if (data.message.includes("author")) {
                         messages.push(authorError);
                     }
                     if (data.message.includes("status")) {
