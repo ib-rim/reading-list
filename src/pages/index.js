@@ -267,7 +267,7 @@ export default function Home() {
             {
                 errorMessages.map(message => {
                     return (
-                        <div className="text-red-600 font-bold">{message}</div>
+                        <div key={message} className="text-red-600 font-bold">{message}</div>
                     )
                 })
             }
