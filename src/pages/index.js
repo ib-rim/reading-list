@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Link from 'next/link';
 
 export default function Home() {
 
@@ -144,7 +145,7 @@ export default function Home() {
             promise.then(getBooks());
         }
     }
-    
+
     const formatStatus = (status) => {
         if (status) {
             return status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
@@ -262,6 +263,7 @@ export default function Home() {
                     }
                 </tbody>
             </table>
+            <Link href="/endpoints" className="text-purple-400 underline block w-fit my-3">API Endpoints</Link>
             {
                 errorMessages.map(message => {
                     return (
