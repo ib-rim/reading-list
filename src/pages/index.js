@@ -12,6 +12,8 @@ export default function Home() {
     const [inputStarted, setInputStarted] = useState('');
     const [inputFinished, setInputFinished] = useState('');
 
+    const [errorMessages, setErrorMessages] = useState([]);
+
     useEffect(() => {
         getBooks();
     }, [])
@@ -49,7 +51,22 @@ export default function Home() {
                 body: JSON.stringify(book),
             })
             const promise = response.json();
-            promise.then(getBooks())
+            if (response.ok) {
+                promise.then(getBooks());
+                setErrorMessages([]);
+            }
+            else {
+                promise.then(data => {
+                    let messages = [];
+                    if (data.message.includes("No title given")) {
+                        messages.push("New book must have a title");
+                    }
+                    if (data.message.includes("No author given")) {
+                        messages.push("New book must have an author");
+                    }
+                    setErrorMessages(messages);
+                });
+            }
         }
     }
 
@@ -86,6 +103,7 @@ export default function Home() {
     }
 
     const handleEdit = (id, title, author, status, started, finished) => {
+        setErrorMessages([]);
         setEditableBook(id);
         if (!id) {
             resetInput();
@@ -124,8 +142,8 @@ export default function Home() {
     }
 
     return (
-        <main>
-            <table className="text-black lg:mx-20 my-5 text-left border-cyan-700 border-l-8">
+        <main className="lg:mx-20">
+            <table className="text-black my-5 text-left border-cyan-700 border-l-8">
                 <caption className="text-5xl text-white text-left font-thin my-10">Reading List</caption>
                 <thead className="text-left">
                     <tr>
@@ -197,10 +215,10 @@ export default function Home() {
                     {!editableBook ?
                         <tr>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title" className="border border-gray-700 px-1 w-full"></input>
+                                <input onInput={e => setInputTitle(e.target.value)} type="text" placeholder="Book Title*" className={`px-1 w-full border ${errorMessages.includes("New book must have a title") ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
-                                <input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author" className="border border-gray-700 px-1 w-full"></input>
+                                <input onInput={e => setInputAuthor(e.target.value)} type="text" placeholder="Book Author*" className={`px-1 w-full border ${errorMessages.includes("New book must have an author") ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                             </td>
                             <td className="px-2 py-1">
                                 <input onInput={e => setInputStatus(e.target.value)} type="text" placeholder="Book Status" className="border border-gray-700 px-1 w-full"></input>
@@ -220,6 +238,13 @@ export default function Home() {
                     }
                 </tbody>
             </table>
+            {
+                errorMessages.map(message => {
+                    return (
+                        <div className="text-red-600 font-bold">{message}</div>
+                    )
+                })
+            }
         </main>
     )
 }
