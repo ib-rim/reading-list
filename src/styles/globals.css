@@ -18,3 +18,48 @@ body {
     color: hsl(var(--text-hsl));
     background-color: hsl(var(--background-hsl));
 }
+
+.bookshelf {
+    --parent-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2px;
+    row-gap: 30px;
+    width: var(--parent-width);
+    align-items: flex-end;
+    overflow: hidden;
+    padding-top: 22px;
+}
+
+.bookshelf .book {
+    position: relative;
+    max-width: 80px;
+    height: 200px;
+    padding: 0.25em;
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto 100px;
+    justify-items: center;
+}
+
+.bookshelf .book::before {
+    content: '';
+    width: calc(var(--parent-width) - 16px);
+    height: 8px;
+    position: absolute;
+    bottom: -8px;
+    background-color: #164e63;
+}
+
+.title {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: black;
+    padding-top: 1em;
+}
+
+.author {
+    font-size: 0.8rem;
+    color: black;
+    width: 50px;
+}
