@@ -5,7 +5,8 @@ export default function Endpoints() {
         <main className="p-3">
             <h1 className="text-3xl font-bold">Reading List API</h1>
             <p className="py-3">Return values are given in JSON.</p>
-            <Link href="/" className="text-purple-400 underline block w-fit mb-3">Reading List Table</Link>
+            <Link href="/table" className="text-purple-400 underline block w-fit mb-3">Reading List Table</Link>
+            <Link href="/" className="text-purple-400 underline block w-fit my-3">Bookshelf</Link>
 
             <div className="divide-y divide-gray-600">
                 <div className="py-3">

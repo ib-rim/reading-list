@@ -273,6 +273,7 @@ export default function Table() {
                 </table>
             }
             <Link href="/endpoints" className="text-purple-400 underline block w-fit my-3">API Endpoints</Link>
+            <Link href="/" className="text-purple-400 underline block w-fit my-3">Bookshelf</Link>
             
             {
                 errorMessages.map(message => {
