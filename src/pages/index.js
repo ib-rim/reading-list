@@ -34,7 +34,7 @@ export default function Home() {
                     <div className="bookshelf bg-cyan-950 border-cyan-900 border-cyan-900 border-8 mx-auto">
                         {
                             books.map((book) => {
-                                return <Book key={book._id} color={book.status === "Read" ? "bg-green-600" : book.status === "Reading" ? "bg-yellow-500" : "bg-red-600"} title={book.title} author={book.author}></Book>
+                                return <Book key={book._id} color={book.status === "Read" ? "book--green" : book.status === "Reading" ? "book--yellow" : "book--red"} title={book.title} author={book.author}></Book>
                             })
                         }
                     </div>

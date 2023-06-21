@@ -42,7 +42,7 @@ body {
     justify-items: center;
     opacity: 0.95;
     box-shadow: 1px 1px 3px #000;
-
+    background-color: var(--book-color);
     border-top-left-radius: var(--radius);
     border-top-right-radius: var(--radius);
 }
@@ -55,6 +55,7 @@ body {
     grid-template-rows: auto calc((var(--book-height) / 2) - 5px);
     isolation: isolate;
     transition: 0.1s;
+    background: linear-gradient(var(--book-color-shadow), var(--book-color), var(--book-color-shadow));
 }
 
 /* Book top */
@@ -84,6 +85,21 @@ body {
     background-color: #164e63;
 }
 
+.book--green {
+    --book-color: hsl(142, 76%, 36%);
+    --book-color-shadow: hsl(142, 76%, 34%);
+}
+
+.book--yellow {
+    --book-color: hsl(45, 93%, 47%);
+    --book-color-shadow: hsl(45, 93%, 45%);
+}
+
+.book--red {
+    --book-color: hsl(0, 72%, 51%);
+    --book-color-shadow: hsl(0, 72%, 49%);
+}
+
 .hard-cover-3 {
     --radius: 3px;
     --page-height: 9px;
@@ -110,16 +126,4 @@ body {
     font-size: 0.8rem;
     color: black;
     width: 50px;
-}
-
-.bg-green-600 {
-    --book-color: #16a34a;
-}
-
-.bg-yellow-500 {
-    --book-color: #eab308;
-}
-
-.bg-red-600 {
-    --book-color: #dc2626;
 }
