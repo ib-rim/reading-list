@@ -23,7 +23,6 @@ body {
     --parent-width: 500px;
     display: flex;
     flex-wrap: wrap;
-    column-gap: 2px;
     row-gap: 30px;
     width: var(--parent-width);
     align-items: flex-end;
@@ -31,24 +30,73 @@ body {
     padding-top: 22px;
 }
 
-.bookshelf .book {
+.book {
     position: relative;
     max-width: 80px;
-    height: 200px;
+    height: var(--book-height);
+    gap: 1em;
     padding: 0.25em;
     text-align: center;
     display: grid;
-    grid-template-rows: auto 100px;
+    grid-template-rows: auto calc(var(--book-height) / 2);
     justify-items: center;
+    opacity: 0.95;
+    box-shadow: 1px 1px 3px #000;
+
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
 }
 
-.bookshelf .book::before {
+.book:hover {
+    opacity: 1;
+    box-shadow: 1px 1px 5px #000;
+    z-index: 1;
+    height: calc(var(--book-height) - 5px);
+    grid-template-rows: auto calc((var(--book-height) / 2) - 5px);
+    isolation: isolate;
+    transition: 0.1s;
+}
+
+/* Book top */
+.book:hover::before {
+    content: '';
+    width: 100%;
+    height: var(--page-height);
+    border: 4px solid var(--book-color);
+    border-top: 0;
+    background-color: rgb(253, 187, 164);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    top: -5px;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Bookshelf divider */
+.book::before {
     content: '';
     width: calc(var(--parent-width) - 16px);
     height: 8px;
     position: absolute;
     bottom: -8px;
     background-color: #164e63;
+}
+
+.hard-cover-3 {
+    --radius: 3px;
+    --page-height: 9px;
+}
+
+.hard-cover-5 {
+    --radius: 5px;
+    --page-height: 11px;
+}
+
+.hard-cover-7 {
+    --radius: 7px;
+    --page-height: 13px;
 }
 
 .title {
@@ -62,4 +110,16 @@ body {
     font-size: 0.8rem;
     color: black;
     width: 50px;
+}
+
+.bg-green-600 {
+    --book-color: #16a34a;
+}
+
+.bg-yellow-500 {
+    --book-color: #eab308;
+}
+
+.bg-red-600 {
+    --book-color: #dc2626;
 }
