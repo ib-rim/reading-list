@@ -24,7 +24,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     row-gap: 30px;
-    width: var(--parent-width);
+    max-width: var(--parent-width);
     align-items: flex-end;
     overflow: hidden;
     padding-top: 22px;
