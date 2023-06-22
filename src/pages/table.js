@@ -228,7 +228,7 @@ export default function Table() {
                                                 formatDateTime(book.finished)
                                             }
                                         </td>
-                                        <td className="font-bold px-2 bg-gray-900">
+                                        <td className="font-bold px-2 bg-white dark:bg-gray-900">
                                             {editableBook === book._id ?
                                                 <>
                                                     <button className="text-green-700 pr-2" onClick={() => updateBook(book._id, inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)}>✓</button>
@@ -262,7 +262,7 @@ export default function Table() {
                                 <td className="px-2 py-1">
                                     <input onInput={e => setInputFinished(e.target.value)} type="text" placeholder="Finished Date" className={`px-1 w-full border ${errorMessages.includes(finishedError) ? "outline outline-2 outline-red-700" : "border-gray-700"}`}></input>
                                 </td>
-                                <td className="bg-gray-900">
+                                <td className="bg-white dark:bg-gray-900">
                                     <button onClick={() => addBook(inputTitle, inputAuthor, inputStatus, inputStarted, inputFinished)} className="text-yellow-500 font-bold px-2">ADD</button>
                                 </td>
                             </tr>
