@@ -3,12 +3,12 @@ export default function Book(props) {
 
     const randomCoverRadius = () => {
         let randNum = Math.floor(Math.random() * 3);
-        let className = 'hard-cover-3';
+        let className = 'cover-1';
         if (randNum === 1) {
-            className = 'hard-cover-5';
+            className = 'cover-2';
         }
         else if (randNum === 2) {
-            className = 'hard-cover-7';
+            className = 'cover-3';
         }
         return className;
     }

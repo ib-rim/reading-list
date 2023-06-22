@@ -105,18 +105,18 @@ body {
     --book-color-shadow: hsl(0, 72%, 49%);
 }
 
-.hard-cover-3 {
-    --radius: 3px;
+.cover-1 {
+    --radius: 0px;
     --page-height: 9px;
 }
 
-.hard-cover-5 {
-    --radius: 5px;
+.cover-2 {
+    --radius: 3px;
     --page-height: 11px;
 }
 
-.hard-cover-7 {
-    --radius: 7px;
+.cover-3 {
+    --radius: 5px;
     --page-height: 13px;
 }
 
