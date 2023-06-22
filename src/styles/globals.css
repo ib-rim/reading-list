@@ -65,7 +65,11 @@ body {
     height: var(--page-height);
     border: 4px solid var(--book-color);
     border-top: 0;
-    background-color: rgb(253, 187, 164);
+    background: repeating-linear-gradient(to right,
+            #fdbda5,
+            #f9cfbf,
+            #fdbda5 2px,
+            #f9cfbf 2px);
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     border-bottom-left-radius: 3px;
