@@ -31,7 +31,7 @@ export default function Home() {
                 loadingMessage ?
                     loadingMessage
                     :
-                    <div className="bookshelf bg-cyan-950 border-cyan-900 border-cyan-900 border-8 mx-auto">
+                    <div className="bookshelf bg-cyan-950 border-cyan-900 border-8 mx-auto">
                         {
                             books.map((book) => {
                                 return <Book key={book._id} color={book.status === "Read" ? "book--green" : book.status === "Reading" ? "book--yellow" : "book--red"} title={book.title} author={book.author}></Book>
