@@ -87,6 +87,7 @@ body {
     position: absolute;
     bottom: -8px;
     background-color: #164e63;
+    pointer-events: none;
 }
 
 .book--green {
