@@ -15,7 +15,7 @@ export default function Book(props) {
 
     const randomHeight = () => {
         let randNum = Math.floor(Math.random() * 4);
-        let height = '190px';
+        let height = '200px';
         if (randNum === 1) {
             height = '190px';
         }
