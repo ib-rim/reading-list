@@ -40,7 +40,6 @@ body {
     display: grid;
     grid-template-rows: auto calc(var(--book-height) / 2);
     justify-items: center;
-    opacity: 0.95;
     box-shadow: 1px 1px 3px #000;
     background-color: var(--book-color);
     border-top-left-radius: var(--radius);
@@ -48,7 +47,6 @@ body {
 }
 
 .book:hover {
-    opacity: 1;
     box-shadow: 1px 1px 5px #000;
     z-index: 1;
     height: calc(var(--book-height) - 5px);
